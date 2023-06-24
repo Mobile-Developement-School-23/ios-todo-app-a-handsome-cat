@@ -15,8 +15,9 @@ struct TodoItem {
     let isDone: Bool
     let createdDate: Date
     let editedDate: Date?
+    let color: String?
     
-    init(id: String = UUID().uuidString, text: String, priority: Priority, deadline: Date? = nil, isDone: Bool, createdDate: Date, editedDate: Date? = nil) {
+    init(id: String = UUID().uuidString, text: String, priority: Priority, deadline: Date? = nil, isDone: Bool, createdDate: Date, editedDate: Date? = nil, color: String? = nil) {
         self.id = id
         self.text = text
         self.priority = priority
@@ -24,6 +25,7 @@ struct TodoItem {
         self.isDone = isDone
         self.createdDate = createdDate
         self.editedDate = editedDate
+        self.color = color
     }
 }
 
@@ -46,6 +48,10 @@ extension TodoItem {
         
         if let editedDate = editedDate {
             dict["editedDate"] = editedDate.timeIntervalSince1970
+        }
+        
+        if let color = color {
+            dict["color"] = color
         }
         
         return dict
@@ -74,6 +80,11 @@ extension TodoItem {
             editedDate = Date(timeIntervalSince1970: editedDateTI)
         }
         
-        return TodoItem(id: id, text: text, priority: priority, deadline: deadline, isDone: isDone, createdDate: Date(timeIntervalSince1970: createdDate), editedDate: editedDate)
+        var color: String? = nil
+        if let colorString = json["color"] as? String {
+            color = colorString
+        }
+        
+        return TodoItem(id: id, text: text, priority: priority, deadline: deadline, isDone: isDone, createdDate: Date(timeIntervalSince1970: createdDate), editedDate: editedDate, color: color)
     }
 }
