@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0085322A4671280049F403 /* TodoDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085312A4671280049F403 /* TodoDetailsTableViewController.swift */; };
+		FE0085342A4671590049F403 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085332A4671590049F403 /* TextViewTableViewCell.swift */; };
+		FE0085362A4672050049F403 /* PriorityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085352A4672050049F403 /* PriorityTableViewCell.swift */; };
+		FE0085382A4672270049F403 /* DeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085372A4672270049F403 /* DeadlineTableViewCell.swift */; };
+		FE00853A2A4672530049F403 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085392A4672530049F403 /* DatePickerTableViewCell.swift */; };
+		FE00853C2A46726B0049F403 /* DeleteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00853B2A46726B0049F403 /* DeleteButtonTableViewCell.swift */; };
+		FE00853E2A4672910049F403 /* ColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00853D2A4672910049F403 /* ColorPickerTableViewCell.swift */; };
+		FE0085402A4672B30049F403 /* ShowColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE00853F2A4672B30049F403 /* ShowColorPickerTableViewCell.swift */; };
+		FE0085422A4672D50049F403 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085412A4672D50049F403 /* ColorPickerView.swift */; };
+		FE0085452A4673010049F403 /* UIColor + HEXCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085442A4673010049F403 /* UIColor + HEXCode.swift */; };
+		FE0085472A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085462A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift */; };
+		FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */; };
 		FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */; };
 		FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */; };
 		FEC83E612A3CF1DA00FFD551 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E602A3CF1DA00FFD551 /* ViewController.swift */; };
-		FEC83E642A3CF1DA00FFD551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEC83E622A3CF1DA00FFD551 /* Main.storyboard */; };
 		FEC83E662A3CF1DE00FFD551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEC83E652A3CF1DE00FFD551 /* Assets.xcassets */; };
 		FEC83E692A3CF1DE00FFD551 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEC83E672A3CF1DE00FFD551 /* LaunchScreen.storyboard */; };
 		FEC83E912A3CF64200FFD551 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E902A3CF64200FFD551 /* ToDoItem.swift */; };
@@ -33,11 +44,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE0085312A4671280049F403 /* TodoDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsTableViewController.swift; sourceTree = "<group>"; };
+		FE0085332A4671590049F403 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		FE0085352A4672050049F403 /* PriorityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityTableViewCell.swift; sourceTree = "<group>"; };
+		FE0085372A4672270049F403 /* DeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineTableViewCell.swift; sourceTree = "<group>"; };
+		FE0085392A4672530049F403 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		FE00853B2A46726B0049F403 /* DeleteButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonTableViewCell.swift; sourceTree = "<group>"; };
+		FE00853D2A4672910049F403 /* ColorPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerTableViewCell.swift; sourceTree = "<group>"; };
+		FE00853F2A4672B30049F403 /* ShowColorPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowColorPickerTableViewCell.swift; sourceTree = "<group>"; };
+		FE0085412A4672D50049F403 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		FE0085442A4673010049F403 /* UIColor + HEXCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + HEXCode.swift"; sourceTree = "<group>"; };
+		FE0085462A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoListTableViewController+TextViewDelegate.swift"; sourceTree = "<group>"; };
+		FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraints+TableViewCellContentView.swift"; sourceTree = "<group>"; };
 		FEC83E592A3CF1DA00FFD551 /* todo-app-ahc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "todo-app-ahc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FEC83E602A3CF1DA00FFD551 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FEC83E632A3CF1DA00FFD551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FEC83E652A3CF1DE00FFD551 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEC83E682A3CF1DE00FFD551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEC83E6A2A3CF1DE00FFD551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,6 +91,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE00852E2A4670CF0049F403 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE0085302A4670FA0049F403 /* TableViewCells */,
+				FE0085412A4672D50049F403 /* ColorPickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE00852F2A4670EB0049F403 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE0085312A4671280049F403 /* TodoDetailsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE0085302A4670FA0049F403 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				FE0085332A4671590049F403 /* TextViewTableViewCell.swift */,
+				FE0085352A4672050049F403 /* PriorityTableViewCell.swift */,
+				FE0085372A4672270049F403 /* DeadlineTableViewCell.swift */,
+				FE0085392A4672530049F403 /* DatePickerTableViewCell.swift */,
+				FE00853B2A46726B0049F403 /* DeleteButtonTableViewCell.swift */,
+				FE00853D2A4672910049F403 /* ColorPickerTableViewCell.swift */,
+				FE00853F2A4672B30049F403 /* ShowColorPickerTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		FE0085432A4672E70049F403 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FE0085442A4673010049F403 /* UIColor + HEXCode.swift */,
+				FE0085462A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift */,
+				FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		FEC83E502A3CF1DA00FFD551 = {
 			isa = PBXGroup;
 			children = (
@@ -90,11 +153,13 @@
 		FEC83E5B2A3CF1DA00FFD551 /* todo-app-ahc */ = {
 			isa = PBXGroup;
 			children = (
+				FE0085432A4672E70049F403 /* Extensions */,
+				FE00852F2A4670EB0049F403 /* ViewControllers */,
+				FE00852E2A4670CF0049F403 /* Views */,
 				FEC83E8F2A3CF63600FFD551 /* Models */,
 				FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */,
 				FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */,
 				FEC83E602A3CF1DA00FFD551 /* ViewController.swift */,
-				FEC83E622A3CF1DA00FFD551 /* Main.storyboard */,
 				FEC83E652A3CF1DE00FFD551 /* Assets.xcassets */,
 				FEC83E672A3CF1DE00FFD551 /* LaunchScreen.storyboard */,
 				FEC83E6A2A3CF1DE00FFD551 /* Info.plist */,
@@ -207,7 +272,6 @@
 			files = (
 				FEC83E692A3CF1DE00FFD551 /* LaunchScreen.storyboard in Resources */,
 				FEC83E662A3CF1DE00FFD551 /* Assets.xcassets in Resources */,
-				FEC83E642A3CF1DA00FFD551 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,11 +290,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEC83E612A3CF1DA00FFD551 /* ViewController.swift in Sources */,
+				FE0085382A4672270049F403 /* DeadlineTableViewCell.swift in Sources */,
+				FE0085402A4672B30049F403 /* ShowColorPickerTableViewCell.swift in Sources */,
+				FE0085362A4672050049F403 /* PriorityTableViewCell.swift in Sources */,
+				FE0085472A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift in Sources */,
+				FE00853A2A4672530049F403 /* DatePickerTableViewCell.swift in Sources */,
+				FE00853E2A4672910049F403 /* ColorPickerTableViewCell.swift in Sources */,
+				FE00853C2A46726B0049F403 /* DeleteButtonTableViewCell.swift in Sources */,
+				FE0085342A4671590049F403 /* TextViewTableViewCell.swift in Sources */,
+				FE0085322A4671280049F403 /* TodoDetailsTableViewController.swift in Sources */,
 				FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */,
+				FE0085452A4673010049F403 /* UIColor + HEXCode.swift in Sources */,
 				FEC83E952A3CF68C00FFD551 /* CSVExtensions.swift in Sources */,
 				FEC83E912A3CF64200FFD551 /* ToDoItem.swift in Sources */,
+				FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */,
 				FEC83E932A3CF66C00FFD551 /* FileCache.swift in Sources */,
 				FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */,
+				FE0085422A4672D50049F403 /* ColorPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,14 +332,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FEC83E622A3CF1DA00FFD551 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FEC83E632A3CF1DA00FFD551 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FEC83E672A3CF1DE00FFD551 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -401,7 +469,6 @@
 				INFOPLIST_FILE = "todo-app-ahc/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -430,7 +497,6 @@
 				INFOPLIST_FILE = "todo-app-ahc/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
