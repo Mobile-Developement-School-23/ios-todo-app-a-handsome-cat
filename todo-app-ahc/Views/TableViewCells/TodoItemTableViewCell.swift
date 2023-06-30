@@ -1,5 +1,6 @@
 
 import UIKit
+import CocoaLumberjackSwift
 
 class TodoItemTableViewCell: UITableViewCell {
     
@@ -62,6 +63,7 @@ class TodoItemTableViewCell: UITableViewCell {
         
         if let img = doneImg {
             checkmarkButton.widthAnchor.constraint(equalToConstant: img.size.width).isActive = true
+            DDLogInfo("successfully set checkmark width: \(img.size.width)")
         }
         checkmarkButton.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2ED2BE8D2584304D102A1AF5 /* Pods_todo_app_ahc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 177D78ED6D36C683C4DECB1A /* Pods_todo_app_ahc.framework */; };
+		B65F9525489F72F0EDF91D54 /* Pods_todo_app_ahcTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82291060EF73612EBC5CBAE0 /* Pods_todo_app_ahcTests.framework */; };
 		FE0085322A4671280049F403 /* TodoDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085312A4671280049F403 /* TodoDetailsTableViewController.swift */; };
 		FE0085342A4671590049F403 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085332A4671590049F403 /* TextViewTableViewCell.swift */; };
 		FE0085362A4672050049F403 /* PriorityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085352A4672050049F403 /* PriorityTableViewCell.swift */; };
@@ -21,6 +23,8 @@
 		FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */; };
 		FE5303FE2A498570005B5A8A /* TodoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */; };
 		FE5304002A49CC9F005B5A8A /* TodoItem+DateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */; };
+		FE53040B2A4F7C81005B5A8A /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040A2A4F7C81005B5A8A /* CocoaLumberjack */; };
+		FE53040D2A4F7C81005B5A8A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040C2A4F7C81005B5A8A /* CocoaLumberjackSwift */; };
 		FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */; };
 		FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */; };
 		FEC83E612A3CF1DA00FFD551 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E602A3CF1DA00FFD551 /* TodoListTableViewController.swift */; };
@@ -46,6 +50,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02FF22C82DB31ADE3EBA75C5 /* Pods-todo-app-ahcTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo-app-ahcTests.release.xcconfig"; path = "Target Support Files/Pods-todo-app-ahcTests/Pods-todo-app-ahcTests.release.xcconfig"; sourceTree = "<group>"; };
+		177D78ED6D36C683C4DECB1A /* Pods_todo_app_ahc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todo_app_ahc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82291060EF73612EBC5CBAE0 /* Pods_todo_app_ahcTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todo_app_ahcTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB1247FF43A92D48D101FAA /* Pods-todo-app-ahc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo-app-ahc.debug.xcconfig"; path = "Target Support Files/Pods-todo-app-ahc/Pods-todo-app-ahc.debug.xcconfig"; sourceTree = "<group>"; };
+		E1047C5FDE634F7E47CA5CC4 /* Pods-todo-app-ahcTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo-app-ahcTests.debug.xcconfig"; path = "Target Support Files/Pods-todo-app-ahcTests/Pods-todo-app-ahcTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F843ADBADB24C6F6AD78C06B /* Pods-todo-app-ahc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo-app-ahc.release.xcconfig"; path = "Target Support Files/Pods-todo-app-ahc/Pods-todo-app-ahc.release.xcconfig"; sourceTree = "<group>"; };
 		FE0085312A4671280049F403 /* TodoDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsTableViewController.swift; sourceTree = "<group>"; };
 		FE0085332A4671590049F403 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		FE0085352A4672050049F403 /* PriorityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityTableViewCell.swift; sourceTree = "<group>"; };
@@ -82,6 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE53040D2A4F7C81005B5A8A /* CocoaLumberjackSwift in Frameworks */,
+				FE53040B2A4F7C81005B5A8A /* CocoaLumberjack in Frameworks */,
+				2ED2BE8D2584304D102A1AF5 /* Pods_todo_app_ahc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +102,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65F9525489F72F0EDF91D54 /* Pods_todo_app_ahcTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C56B4AB9965369B29ED6CAC7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BFB1247FF43A92D48D101FAA /* Pods-todo-app-ahc.debug.xcconfig */,
+				F843ADBADB24C6F6AD78C06B /* Pods-todo-app-ahc.release.xcconfig */,
+				E1047C5FDE634F7E47CA5CC4 /* Pods-todo-app-ahcTests.debug.xcconfig */,
+				02FF22C82DB31ADE3EBA75C5 /* Pods-todo-app-ahcTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		EAAEB4CCC285B14273265686 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				177D78ED6D36C683C4DECB1A /* Pods_todo_app_ahc.framework */,
+				82291060EF73612EBC5CBAE0 /* Pods_todo_app_ahcTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FE00852E2A4670CF0049F403 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +179,8 @@
 				FEC83E5B2A3CF1DA00FFD551 /* todo-app-ahc */,
 				FEC83E722A3CF1DE00FFD551 /* todo-app-ahcTests */,
 				FEC83E5A2A3CF1DA00FFD551 /* Products */,
+				C56B4AB9965369B29ED6CAC7 /* Pods */,
+				EAAEB4CCC285B14273265686 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +237,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEC83E832A3CF1DE00FFD551 /* Build configuration list for PBXNativeTarget "todo-app-ahc" */;
 			buildPhases = (
+				85774A19CDBEC45B223CC428 /* [CP] Check Pods Manifest.lock */,
 				FEC83E552A3CF1DA00FFD551 /* Sources */,
 				FEC83E562A3CF1DA00FFD551 /* Frameworks */,
 				FEC83E572A3CF1DA00FFD551 /* Resources */,
@@ -210,6 +247,10 @@
 			dependencies = (
 			);
 			name = "todo-app-ahc";
+			packageProductDependencies = (
+				FE53040A2A4F7C81005B5A8A /* CocoaLumberjack */,
+				FE53040C2A4F7C81005B5A8A /* CocoaLumberjackSwift */,
+			);
 			productName = "todo-app-ahc";
 			productReference = FEC83E592A3CF1DA00FFD551 /* todo-app-ahc.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +259,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEC83E862A3CF1DE00FFD551 /* Build configuration list for PBXNativeTarget "todo-app-ahcTests" */;
 			buildPhases = (
+				D6D398538EC77313ED06AFA6 /* [CP] Check Pods Manifest.lock */,
 				FEC83E6B2A3CF1DE00FFD551 /* Sources */,
 				FEC83E6C2A3CF1DE00FFD551 /* Frameworks */,
 				FEC83E6D2A3CF1DE00FFD551 /* Resources */,
@@ -261,6 +303,9 @@
 				Base,
 			);
 			mainGroup = FEC83E502A3CF1DA00FFD551;
+			packageReferences = (
+				FE5304092A4F7C81005B5A8A /* XCRemoteSwiftPackageReference "CocoaLumberJack" */,
+			);
 			productRefGroup = FEC83E5A2A3CF1DA00FFD551 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -289,6 +334,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		85774A19CDBEC45B223CC428 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-todo-app-ahc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6D398538EC77313ED06AFA6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-todo-app-ahcTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FEC83E552A3CF1DA00FFD551 /* Sources */ = {
@@ -467,6 +559,7 @@
 		};
 		FEC83E842A3CF1DE00FFD551 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFB1247FF43A92D48D101FAA /* Pods-todo-app-ahc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -495,6 +588,7 @@
 		};
 		FEC83E852A3CF1DE00FFD551 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F843ADBADB24C6F6AD78C06B /* Pods-todo-app-ahc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -523,6 +617,7 @@
 		};
 		FEC83E872A3CF1DE00FFD551 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1047C5FDE634F7E47CA5CC4 /* Pods-todo-app-ahcTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -550,6 +645,7 @@
 		};
 		FEC83E882A3CF1DE00FFD551 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02FF22C82DB31ADE3EBA75C5 /* Pods-todo-app-ahcTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -605,6 +701,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE5304092A4F7C81005B5A8A /* XCRemoteSwiftPackageReference "CocoaLumberJack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberJack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE53040A2A4F7C81005B5A8A /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5304092A4F7C81005B5A8A /* XCRemoteSwiftPackageReference "CocoaLumberJack" */;
+			productName = CocoaLumberjack;
+		};
+		FE53040C2A4F7C81005B5A8A /* CocoaLumberjackSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5304092A4F7C81005B5A8A /* XCRemoteSwiftPackageReference "CocoaLumberJack" */;
+			productName = CocoaLumberjackSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FEC83E512A3CF1DA00FFD551 /* Project object */;
 }
