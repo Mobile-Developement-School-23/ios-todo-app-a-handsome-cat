@@ -14,6 +14,7 @@ class TextViewTableViewCell: UITableViewCell, UITextViewDelegate {
     }
     
     let textView = UITextView()
+    var textViewHeightConstraint: NSLayoutConstraint?
     
     func configure() {
         textView.backgroundColor = self.backgroundColor
@@ -29,7 +30,9 @@ class TextViewTableViewCell: UITableViewCell, UITextViewDelegate {
         self.contentView.addSubview(textView)
         
         NSLayoutConstraint.constraintToTableViewCellContentView(view: textView, cell: self)
-        textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120).isActive = true
+        textViewHeightConstraint = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120)
+        textViewHeightConstraint?.isActive = true
+        textViewHeightConstraint?.priority = UILayoutPriority(750)
     }
 
 }

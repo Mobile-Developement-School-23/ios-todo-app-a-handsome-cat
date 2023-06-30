@@ -12,7 +12,7 @@ struct TodoItem {
     let text: String
     let priority: Priority
     let deadline: Date?
-    let isDone: Bool
+    var isDone: Bool
     let createdDate: Date
     let editedDate: Date?
     let color: String?

@@ -22,6 +22,7 @@ class DatePickerTableViewCell: UITableViewCell {
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
         datePicker.minimumDate = Date()
+        datePicker.date = Date().advanced(by: 3600*24)
         
         NSLayoutConstraint.constraintToTableViewCellContentView(view: datePicker, cell: self)
     }

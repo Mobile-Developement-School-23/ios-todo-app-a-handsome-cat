@@ -19,7 +19,7 @@ class TodoDetailsTableViewController: UITableViewController {
         let color = showColorPickerViewCell.switcher.isOn ? colorPickerCell.colorPickerView.desiredColor.toHex() : nil
         
         if let editedItem = editedItem {
-            return TodoItem(id: editedItem.id, text: text, priority: priority, deadline: deadline, isDone: false, createdDate: editedItem.createdDate, editedDate: Date(), color: color)
+            return TodoItem(id: editedItem.id, text: text, priority: priority, deadline: deadline, isDone: editedItem.isDone, createdDate: editedItem.createdDate, editedDate: Date(), color: color)
         } else {
             return TodoItem(text: text, priority: priority, deadline: deadline, isDone: false, createdDate: Date(), color: color)
         }
@@ -37,6 +37,9 @@ class TodoDetailsTableViewController: UITableViewController {
     let colorPickerCell = ColorPickerTableViewCell()
     
     let deleteButtonCell = DeleteButtonTableViewCell()
+    
+    var saveItemAction: ((_: TodoItem) -> Void)?
+    var deleteItemAction: ((_: TodoItem) -> Void)?
     
     var showCalendar: Bool = false {
         didSet {
@@ -65,7 +68,13 @@ class TodoDetailsTableViewController: UITableViewController {
             tableView.endUpdates()
         }
     }
-    
+    var sections: Int {
+        if UIScreen.main.bounds.height > UIScreen.main.bounds.width {
+            return 4
+        } else {
+            return 1
+        }
+    }
     var rowsInSectionOne = 2
     var rowsInSectionTwo = 1
     
@@ -87,30 +96,15 @@ class TodoDetailsTableViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Отменить", comment: "Cancel"), style: .plain, target: self, action: #selector(didTapCancelButton))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Сохранить", comment: "Save todoitem"), style: .done, target: self, action: #selector(didTapSaveButton))
         
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(tappedAnywhere))
+        tableView.addGestureRecognizer(recognizer)
+        
         updateSaveButtonStatus()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    @objc func keyboardWasShown(_ notification: NSNotification) {
-        if let keyboardArea = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardArea.height - view.safeAreaInsets.bottom, right: 0)
-            tableView.contentInset = edgeInsets
-            tableView.scrollIndicatorInsets = edgeInsets
-            tableView.scrollToRow(at: [0,0], at: .bottom, animated: false)
-        }
-    }
-    
-    @objc func keyboardWillBeHidden(_ notification: NSNotification) {
-        tableView.contentInset = .zero
-        tableView.scrollIndicatorInsets = .zero
     }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return sections
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -157,14 +151,14 @@ class TodoDetailsTableViewController: UITableViewController {
             return UITableView.automaticDimension
         }
     }
-    
+    /*
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath == [1,0] || indexPath == [1,1] || indexPath == [2,0] || indexPath == [3,0] {
             return 56
-        } else {
+        }  else {
             return UITableView.automaticDimension
         }
-    }
+    } */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
@@ -210,8 +204,9 @@ class TodoDetailsTableViewController: UITableViewController {
             } else {
                 deadlineCell.switcher.isOn = false
                 showCalendar = false
-                datePickerCell.datePicker.date = Date().advanced(by: 3600*24)
             }
+            deleteButtonCell.deleteButton.isEnabled = true
+            deleteButtonCell.deleteButton.setTitleColor(.red, for: .normal)
         }
     }
     
@@ -256,17 +251,15 @@ class TodoDetailsTableViewController: UITableViewController {
     }
     
     @objc func didTapSaveButton() {
-        if let item = item {
-            FileCache.shared.add(newItem: item)
-            FileCache.shared.saveToJSONFile(fileName: "jsonitems")
+        if let item = item, let saveItemAction = saveItemAction {
+            saveItemAction(item)
         }
         dismiss(animated: true)
     }
     
     @objc func didTapDeleteButton() {
-        if let item = editedItem {
-            FileCache.shared.delete(byID: item.id)
-            FileCache.shared.saveToJSONFile(fileName: "jsonitems")
+        if let item = editedItem, let deleteItemAction = deleteItemAction {
+            deleteItemAction(item)
         }
         dismiss(animated: true)
     }
@@ -275,5 +268,22 @@ class TodoDetailsTableViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    @objc func tappedAnywhere(_ sender: UITapGestureRecognizer) {
+        if !(sender.view is UITextView) {
+            textViewCell.textView.resignFirstResponder()
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if UIDevice.current.orientation.isLandscape {
+            textViewCell.textViewHeightConstraint?.constant = UIScreen.main.bounds.height - (navigationController?.navigationBar.frame.height ?? 0) - view.safeAreaInsets.top - view.safeAreaInsets.bottom
+            textViewCell.contentView.layoutIfNeeded()
+        } else {
+            textViewCell.textViewHeightConstraint?.constant = 120
+            textViewCell.contentView.layoutIfNeeded()
+        }
+    }
     
 }

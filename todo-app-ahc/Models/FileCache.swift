@@ -2,7 +2,6 @@
 import Foundation
 
 class FileCache {
-    static let shared = FileCache()
     
     private(set) var items = [TodoItem]()
     
