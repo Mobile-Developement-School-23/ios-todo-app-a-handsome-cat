@@ -97,6 +97,7 @@ class TodoDetailsTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Сохранить", comment: "Save todoitem"), style: .done, target: self, action: #selector(didTapSaveButton))
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(tappedAnywhere))
+        recognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(recognizer)
         
         updateSaveButtonStatus()
@@ -162,7 +163,6 @@ class TodoDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
         if indexPath == [1,1] && deadlineCell.switcher.isOn {
             showCalendar.toggle()
         }
