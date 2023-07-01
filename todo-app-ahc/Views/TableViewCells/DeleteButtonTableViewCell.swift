@@ -17,7 +17,8 @@ class DeleteButtonTableViewCell: UITableViewCell {
     func configure() {
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.setTitle(NSLocalizedString("Удалить", comment: "delete button"), for: .normal)
-        deleteButton.setTitleColor(.red, for: .normal)
+        deleteButton.setTitleColor(.lightGray, for: .normal)
+        deleteButton.isEnabled = false
         
         self.contentView.addSubview(deleteButton)
         NSLayoutConstraint.activate([

@@ -21,7 +21,10 @@ extension TodoDetailsTableViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        tableView.scrollToRow(at: [0,0], at: .bottom, animated: false)
+        if let cursorPosition = textView.selectedTextRange?.start {
+            let caretPositionRect = textView.caretRect(for: cursorPosition)
+            tableView.scrollRectToVisible(caretPositionRect, animated: false)
+        }
         updateSaveButtonStatus()
         tableView.beginUpdates()
         tableView.endUpdates()
