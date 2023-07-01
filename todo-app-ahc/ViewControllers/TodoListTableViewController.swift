@@ -125,12 +125,12 @@ class TodoListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.row == filteredItems.count {
             self.addNewItem()
         } else {
             self.showTodoListDetailsTableView(indexPath: indexPath)
         }
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -183,6 +183,10 @@ class TodoListTableViewController: UITableViewController {
         let todoDetailsViewController = TodoDetailsTableViewController()
         todoDetailsViewController.editedItem = self.filteredItems[indexPath.row]
         let navigation = UINavigationController(rootViewController: todoDetailsViewController)
+        
+        navigation.modalPresentationStyle = .custom
+        navigation.transitioningDelegate = self
+        
         todoDetailsViewController.saveItemAction = { item in
             self.fileCache.add(newItem: item)
             self.tableView.reloadData()
@@ -201,5 +205,57 @@ class TodoListTableViewController: UITableViewController {
         showDone.toggle()
         tableView.reloadData()
     }
+    
+    var cardView: UIViewController?
+    
+    func createCard(indexPath: IndexPath) -> UIViewController {
+        let view = UIViewController()
+        view.view.backgroundColor = .darkGray
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "Пожалуйста, не трогайте меня!\nМне еще нужно успеть\n\(self.filteredItems[indexPath.row].text)"
+        if let deadline = self.filteredItems[indexPath.row].deadlineString {
+            label.text?.append("\nдо \(deadline)")
+        }
+        label.textColor = .systemRed
+        view.view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.view.centerYAnchor).isActive = true
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: {
+            if indexPath.row == self.filteredItems.count {
+                return TodoDetailsTableViewController()
+            } else {
+                self.cardView = self.createCard(indexPath: indexPath)
+                return self.cardView
+            }
+        })
+    }
+    
+    override func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        let view = createCard(indexPath: indexPath)
+        let renderer = UIGraphicsImageRenderer(size: view.view.bounds.size)
+        let image = renderer.image { _ in
+            view.view.drawHierarchy(in: view.view.bounds, afterScreenUpdates: true)
+        }
+        
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view
+        self.cardView?.dismiss(animated: true)
+        self.present(activityController, animated: true)
+    }
 }
 
+extension TodoListTableViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let controller = TransitioningAnimationController(frame: tableView.rectForRow(at: tableView.indexPathForSelectedRow ?? IndexPath(row: 0, section: 0)))
+        return controller
+    }
+    
+}

@@ -21,6 +21,7 @@
 		FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */; };
 		FE5303FE2A498570005B5A8A /* TodoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */; };
 		FE5304002A49CC9F005B5A8A /* TodoItem+DateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */; };
+		FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */; };
 		FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */; };
 		FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */; };
 		FEC83E612A3CF1DA00FFD551 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E602A3CF1DA00FFD551 /* TodoListTableViewController.swift */; };
@@ -60,6 +61,7 @@
 		FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraints+TableViewCellContentView.swift"; sourceTree = "<group>"; };
 		FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemTableViewCell.swift; sourceTree = "<group>"; };
 		FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItem+DateStrings.swift"; sourceTree = "<group>"; };
+		FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningAnimationController.swift; sourceTree = "<group>"; };
 		FEC83E592A3CF1DA00FFD551 /* todo-app-ahc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "todo-app-ahc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		FEC83E5B2A3CF1DA00FFD551 /* todo-app-ahc */ = {
 			isa = PBXGroup;
 			children = (
+				FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */,
 				FE0085432A4672E70049F403 /* Extensions */,
 				FE00852F2A4670EB0049F403 /* ViewControllers */,
 				FE00852E2A4670CF0049F403 /* Views */,
@@ -314,6 +317,7 @@
 				FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */,
 				FEC83E932A3CF66C00FFD551 /* FileCache.swift in Sources */,
 				FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */,
+				FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */,
 				FE0085422A4672D50049F403 /* ColorPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
