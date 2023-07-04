@@ -1,4 +1,3 @@
-
 import UIKit
 
 extension TodoDetailsTableViewController: UITextViewDelegate {
@@ -12,14 +11,14 @@ extension TodoDetailsTableViewController: UITextViewDelegate {
             }
         }
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textViewCell.textView.text = "Что надо сделать?"
             textViewCell.textView.textColor = .placeholderText
         }
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         if let cursorPosition = textView.selectedTextRange?.start {
             let caretPositionRect = textView.caretRect(for: cursorPosition)
