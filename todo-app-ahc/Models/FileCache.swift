@@ -3,6 +3,14 @@ import Foundation
 class FileCache {
 
     private(set) var items = [TodoItem]()
+    var isDirty: Bool {
+        get {
+            UserDefaults.standard.value(forKey: "isDirty") as? Bool ?? false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "isDirty")
+        }
+    }
 
     func add(newItem: TodoItem) {
         if let collisionIndex = items.firstIndex(where: { $0.id == newItem.id }) {
@@ -14,6 +22,10 @@ class FileCache {
 
     func delete(byID id: String) {
         items.removeAll { $0.id == id }
+    }
+
+    func replace(with items: [TodoItem]) {
+        self.items = items
     }
 
     func saveToJSONFile(fileName: String) {
