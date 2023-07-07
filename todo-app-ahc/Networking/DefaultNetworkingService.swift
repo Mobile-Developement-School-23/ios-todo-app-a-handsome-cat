@@ -2,7 +2,15 @@ import Foundation
 
 class DefaultNetworkingService: NetworkingService {
 
+    var active: Int = 0 {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name("activeCountChanged"), object: nil)
+        }
+    }
+
     func sendAPIRequest(_ apiRequest: APIRequest) async throws -> Data {
+        self.active += 1
+
         guard var baseURL = URLComponents(string: "https://beta.mrdekk.ru/todobackend/list")
         else { throw NetworkingErrors.formingRequest }
 
@@ -39,7 +47,7 @@ class DefaultNetworkingService: NetworkingService {
                 throw NetworkingErrors.unknownError
             }
         }
-
+        active -= 1
         return data
     }
 

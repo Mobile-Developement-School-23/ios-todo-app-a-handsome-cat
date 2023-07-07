@@ -30,22 +30,25 @@ class TodoItemsManager {
 
             let fetchConfigurationRequest = APIRequest()
 
-            let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-            let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-            currentServerRevision = resp.revision
+            do {
+                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
+                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
+                currentServerRevision = resp.revision
 
-            if let fetched = resp.list {
-                items = []
-                for serverItem in fetched {
-                    items.append(serverItem.convertToLocal())
+                if let fetched = resp.list {
+                    items = []
+                    for serverItem in fetched {
+                        items.append(serverItem.convertToLocal())
+                    }
+                    fileCache.replace(with: items)
+                    fileCache.saveToJSONFile(fileName: filename)
+                    self.items = items
                 }
-                fileCache.replace(with: items)
-                fileCache.saveToJSONFile(fileName: filename)
-                self.items = items
+            } catch {
+                networkService.active -= 1
             }
 
             DispatchQueue.main.async {
-                print("completion")
                 completion()
             }
         }
@@ -64,18 +67,21 @@ class TodoItemsManager {
             let fetchConfigurationRequest = APIRequest(httpMethod: "PATCH",
                                                        revision: currentServerRevision,
                                                        data: outData)
+            do {
+                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
+                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
+                currentServerRevision = resp.revision
 
-            let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-            let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-            currentServerRevision = resp.revision
-
-            if let fetched = resp.list {
-                items = []
-                fileCache.isDirty = false
-                for serverItem in fetched {
-                    items.append(serverItem.convertToLocal())
+                if let fetched = resp.list {
+                    items = []
+                    fileCache.isDirty = false
+                    for serverItem in fetched {
+                        items.append(serverItem.convertToLocal())
+                    }
+                    self.items = items
                 }
-                self.items = items
+            } catch {
+                networkService.active -= 1
             }
         }
     }
@@ -138,6 +144,7 @@ class TodoItemsManager {
             let resp = try JSONDecoder().decode(APIResponse.self, from: data)
             currentServerRevision = resp.revision
         } catch NetworkingErrors.serverError {
+            networkService.active -= 1
             DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
                 let newDelay = delay * 1.5 + Double.random(in: -0.05...0.05)
                 if newDelay < 120 {
@@ -153,6 +160,7 @@ class TodoItemsManager {
                 }
             }
         } catch {
+            networkService.active -= 1
             self.fileCache.isDirty = true
         }
     }

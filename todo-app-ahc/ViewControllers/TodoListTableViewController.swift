@@ -6,6 +6,8 @@ class TodoListTableViewController: UITableViewController {
 
     let itemsManager = TodoItemsManager()
 
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+
     var filteredItems: [TodoItem] {
         return showDone ? itemsManager.items : itemsManager.items.filter { !$0.isDone }
     }
@@ -22,6 +24,13 @@ class TodoListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateActivityIndicator),
+                                               name: Notification.Name("activeCountChanged"),
+                                               object: nil)
 
         Task {
             itemsManager.getList(completion: { self.tableView.reloadData() })
@@ -226,6 +235,16 @@ class TodoListTableViewController: UITableViewController {
     @objc func showHideButtonTapped() {
         showDone.toggle()
         tableView.reloadData()
+    }
+
+    @objc func updateActivityIndicator() {
+        DispatchQueue.main.async {
+            if self.itemsManager.networkService.active == 0 {
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.activityIndicator.startAnimating()
+            }
+        }
     }
 
     var cardView: UIViewController?
