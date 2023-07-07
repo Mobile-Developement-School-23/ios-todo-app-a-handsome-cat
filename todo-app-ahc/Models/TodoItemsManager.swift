@@ -30,24 +30,22 @@ class TodoItemsManager {
 
             let fetchConfigurationRequest = APIRequest()
 
-            do {
-                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
+            let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
+            let resp = try JSONDecoder().decode(APIResponse.self, from: data)
+            currentServerRevision = resp.revision
 
-                if let fetched = resp.list {
-                    items = []
-                    for serverItem in fetched {
-                        items.append(serverItem.convertToLocal())
-                    }
+            if let fetched = resp.list {
+                items = []
+                for serverItem in fetched {
+                    items.append(serverItem.convertToLocal())
                 }
-            } catch {
-
+                fileCache.replace(with: items)
+                fileCache.saveToJSONFile(fileName: filename)
+                self.items = items
             }
-            fileCache.replace(with: items)
-            fileCache.saveToJSONFile(fileName: filename)
-            self.items = items
+
             DispatchQueue.main.async {
+                print("completion")
                 completion()
             }
         }
@@ -67,21 +65,17 @@ class TodoItemsManager {
                                                        revision: currentServerRevision,
                                                        data: outData)
 
-            do {
-                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
+            let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
+            let resp = try JSONDecoder().decode(APIResponse.self, from: data)
+            currentServerRevision = resp.revision
 
-                if let fetched = resp.list {
-                    items = []
-                    fileCache.isDirty = false
-                    for serverItem in fetched {
-                        items.append(serverItem.convertToLocal())
-                    }
-                    self.items = items
+            if let fetched = resp.list {
+                items = []
+                fileCache.isDirty = false
+                for serverItem in fetched {
+                    items.append(serverItem.convertToLocal())
                 }
-            } catch {
-
+                self.items = items
             }
         }
     }
@@ -91,11 +85,6 @@ class TodoItemsManager {
         fileCache.add(newItem: item)
         fileCache.saveToJSONFile(fileName: filename)
 
-        if fileCache.isDirty {
-            patchList()
-            return
-        }
-
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
             let outData = try JSONEncoder().encode(outgoing)
@@ -104,13 +93,7 @@ class TodoItemsManager {
                                                        revision: currentServerRevision,
                                                        data: outData)
 
-            do {
-                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
-            } catch {
-                fileCache.isDirty = true
-            }
+            try await sendWithRetries(fetchConfigurationRequest, delay: 2)
         }
     }
 
@@ -121,11 +104,6 @@ class TodoItemsManager {
         fileCache.add(newItem: item)
         fileCache.saveToJSONFile(fileName: filename)
 
-        if fileCache.isDirty {
-            patchList()
-            return
-        }
-
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
             let outData = try JSONEncoder().encode(outgoing)
@@ -135,13 +113,7 @@ class TodoItemsManager {
                                                        revision: currentServerRevision,
                                                        data: outData)
 
-            do {
-                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
-            } catch {
-                fileCache.isDirty = true
-            }
+            try await sendWithRetries(fetchConfigurationRequest, delay: 2)
         }
     }
 
@@ -152,24 +124,36 @@ class TodoItemsManager {
         fileCache.delete(byID: item.id)
         fileCache.saveToJSONFile(fileName: filename)
 
-        if fileCache.isDirty {
-            patchList()
-            return
-        }
-
         Task {
             let fetchConfigurationRequest = APIRequest(httpMethod: "DELETE",
                                                        id: item.id,
                                                        revision: currentServerRevision)
+            try await sendWithRetries(fetchConfigurationRequest, delay: 2)
+        }
+    }
 
-            do {
-                let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
-                let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
+    func sendWithRetries(_ request: APIRequest, delay: TimeInterval) async throws {
+        do {
+            let data = try await networkService.sendAPIRequest(request)
+            let resp = try JSONDecoder().decode(APIResponse.self, from: data)
+            currentServerRevision = resp.revision
+        } catch NetworkingErrors.serverError {
+            DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+                let newDelay = delay * 1.5 + Double.random(in: -0.05...0.05)
+                if newDelay < 120 {
+                    Task { try await self.sendWithRetries(request, delay: newDelay) }
+                } else {
+                    //помечаем модель как dirty, чтобы в следующем запуске попытаться пропатчить...
+                    self.fileCache.isDirty = true
 
-            } catch {
-                fileCache.isDirty = true
+                    self.getList(completion: {
+                        self.fileCache.isDirty = false
+                        //...но если мы смогли получить список от сервера, то не надо
+                    })
+                }
             }
+        } catch {
+            self.fileCache.isDirty = true
         }
     }
 }

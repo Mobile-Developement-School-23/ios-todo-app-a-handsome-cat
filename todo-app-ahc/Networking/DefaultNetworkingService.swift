@@ -4,7 +4,7 @@ class DefaultNetworkingService: NetworkingService {
 
     func sendAPIRequest(_ apiRequest: APIRequest) async throws -> Data {
         guard var baseURL = URLComponents(string: "https://beta.mrdekk.ru/todobackend/list")
-            else { throw NetworkingErrors.formingRequest }
+        else { throw NetworkingErrors.formingRequest }
 
         if let id = apiRequest.id {
             baseURL.path = "/todobackend/list/\(id)"
@@ -12,9 +12,7 @@ class DefaultNetworkingService: NetworkingService {
 
         guard let requestUrl = baseURL.url else { throw NetworkingErrors.formingRequest }
 
-        print(requestUrl)
-
-        var request = URLRequest(url: requestUrl)
+        var request = URLRequest(url: requestUrl, timeoutInterval: 20)
 
         request.setValue("Bearer unfrenchified", forHTTPHeaderField: "Authorization")
 
@@ -32,9 +30,15 @@ class DefaultNetworkingService: NetworkingService {
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            print(response)
-            throw NetworkingErrors.formingRequest }
+        guard let response = response as? HTTPURLResponse else { throw NetworkingErrors.formingRequest }
+
+        guard response.statusCode == 200 else {
+            if response.statusCode == 500 {
+                throw NetworkingErrors.serverError
+            } else {
+                throw NetworkingErrors.unknownError
+            }
+        }
 
         return data
     }
