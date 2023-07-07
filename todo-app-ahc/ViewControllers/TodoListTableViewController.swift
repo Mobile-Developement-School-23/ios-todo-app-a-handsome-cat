@@ -3,21 +3,30 @@ import UIKit
 class TodoListTableViewController: UITableViewController {
 
     var cellID = "todoItemCell"
-    var filename = "jsonitems"
-    let fileCache = FileCache()
+
+    let itemsManager = TodoItemsManager()
 
     var filteredItems: [TodoItem] {
-        return showDone ? fileCache.items : fileCache.items.filter { !$0.isDone }
+        return showDone ? itemsManager.items : itemsManager.items.filter { !$0.isDone }
     }
 
-    var showDone = true {
-        didSet {
+    var showDone: Bool {
+        get {
+            UserDefaults.standard.value(forKey: "showDone") as? Bool ?? true
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "showDone")
             tableView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        Task {
+            itemsManager.getList(completion: { self.tableView.reloadData() })
+            tableView.reloadData()
+        }
 
         navigationItem.title = "Мои дела"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -45,8 +54,6 @@ class TodoListTableViewController: UITableViewController {
         addNewItemCircleButton.layer.shadowOpacity = 1.0
         addNewItemCircleButton.layer.shadowRadius = 5.0
         addNewItemCircleButton.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
-
-        fileCache.loadFromJSONFile(fileName: self.filename)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,9 +83,8 @@ class TodoListTableViewController: UITableViewController {
 
             cell.action = {
                 item.isDone.toggle()
-                self.fileCache.add(newItem: item)
+                self.itemsManager.editItem(item)
                 tableView.reloadData()
-                self.fileCache.saveToJSONFile(fileName: self.filename)
             }
             cell.configure()
             return cell
@@ -86,7 +92,7 @@ class TodoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == filteredItems.count || filteredItems[indexPath.row].isDone {
+        if indexPath.row == filteredItems.count || filteredItems[indexPath.row].deadlineString == nil {
             return 56
         } else if filteredItems[indexPath.row].deadlineString != nil {
             return 66
@@ -112,7 +118,7 @@ class TodoListTableViewController: UITableViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        let done = fileCache.items.filter({ $0.isDone })
+        let done = itemsManager.fileCache.items.filter({ $0.isDone })
         label.text = "Выполнено - \(done.count)"
         label.textColor = .lightGray
         stackView.addArrangedSubview(label)
@@ -151,9 +157,8 @@ class TodoListTableViewController: UITableViewController {
         let markAsDoneAction = UIContextualAction(style: .normal, title: "") { _, _, completion in
             var item = self.filteredItems[indexPath.row]
             item.isDone.toggle()
-            self.fileCache.add(newItem: item)
+            self.itemsManager.editItem(item)
             tableView.reloadData()
-            self.fileCache.saveToJSONFile(fileName: self.filename)
             completion(true)
         }
         markAsDoneAction.backgroundColor = .systemGreen
@@ -174,9 +179,9 @@ class TodoListTableViewController: UITableViewController {
             .withTintColor(.white, renderingMode: .alwaysOriginal)
 
         let deleteItemAction = UIContextualAction(style: .normal, title: "") { _, _, completion in
-            self.fileCache.delete(byID: self.filteredItems[indexPath.row].id)
-            tableView.reloadData()
-            self.fileCache.saveToJSONFile(fileName: self.filename)
+            let item = self.filteredItems[indexPath.row]
+            self.itemsManager.deleteItem(item)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             completion(true)
         }
         deleteItemAction.backgroundColor = .systemRed
@@ -190,11 +195,9 @@ class TodoListTableViewController: UITableViewController {
         let navigation = UINavigationController(rootViewController: todoDetailsViewController)
         let newItemIndexPath = IndexPath(row: filteredItems.count, section: 0)
         todoDetailsViewController.saveItemAction = { item in
-            self.fileCache.add(newItem: item)
+            self.itemsManager.addItem(item)
             self.tableView.insertRows(at: [newItemIndexPath], with: .automatic)
-            self.fileCache.saveToJSONFile(fileName: self.filename)
         }
-
         present(navigation, animated: true)
     }
 
@@ -207,15 +210,15 @@ class TodoListTableViewController: UITableViewController {
         navigation.transitioningDelegate = self
 
         todoDetailsViewController.saveItemAction = { item in
-            self.fileCache.add(newItem: item)
-            self.tableView.reloadData()
-            self.fileCache.saveToJSONFile(fileName: self.filename)
+            self.itemsManager.editItem(item)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
 
         todoDetailsViewController.deleteItemAction = { item in
-            self.fileCache.delete(byID: item.id)
-            self.tableView.reloadData()
-            self.fileCache.saveToJSONFile(fileName: self.filename)
+            Task {
+                self.itemsManager.deleteItem(item)
+                self.tableView.reloadData()
+            }
         }
         present(navigation, animated: true)
     }
