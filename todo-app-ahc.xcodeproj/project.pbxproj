@@ -23,9 +23,9 @@
 		FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0085482A46794E0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift */; };
 		FE5303FE2A498570005B5A8A /* TodoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */; };
 		FE5304002A49CC9F005B5A8A /* TodoItem+DateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */; };
+		FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */; };
 		FE53040B2A4F7C81005B5A8A /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040A2A4F7C81005B5A8A /* CocoaLumberjack */; };
 		FE53040D2A4F7C81005B5A8A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040C2A4F7C81005B5A8A /* CocoaLumberjackSwift */; };
-		FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */; };
 		FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */; };
 		FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */; };
 		FEC83E612A3CF1DA00FFD551 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E602A3CF1DA00FFD551 /* TodoListTableViewController.swift */; };
@@ -34,10 +34,10 @@
 		FEC83E912A3CF64200FFD551 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E902A3CF64200FFD551 /* ToDoItem.swift */; };
 		FEC83E932A3CF66C00FFD551 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E922A3CF66C00FFD551 /* FileCache.swift */; };
 		FEC83E952A3CF68C00FFD551 /* CSVExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E942A3CF68C00FFD551 /* CSVExtensions.swift */; };
-		FEC83E972A3CF6CB00FFD551 /* jsonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E962A3CF6CB00FFD551 /* jsonTests.swift */; };
+		FEC83E972A3CF6CB00FFD551 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E962A3CF6CB00FFD551 /* JSONTests.swift */; };
 		FEC83E992A3CF70800FFD551 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E982A3CF70800FFD551 /* TestData.swift */; };
-		FEC83E9B2A3CF72C00FFD551 /* csvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9A2A3CF72C00FFD551 /* csvTests.swift */; };
-		FEC83E9D2A3CF76600FFD551 /* readWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9C2A3CF76600FFD551 /* readWriteTests.swift */; };
+		FEC83E9B2A3CF72C00FFD551 /* CSVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */; };
+		FEC83E9D2A3CF76600FFD551 /* ReadWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,10 +83,10 @@
 		FEC83E902A3CF64200FFD551 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		FEC83E922A3CF66C00FFD551 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		FEC83E942A3CF68C00FFD551 /* CSVExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExtensions.swift; sourceTree = "<group>"; };
-		FEC83E962A3CF6CB00FFD551 /* jsonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonTests.swift; sourceTree = "<group>"; };
+		FEC83E962A3CF6CB00FFD551 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		FEC83E982A3CF70800FFD551 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
-		FEC83E9A2A3CF72C00FFD551 /* csvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = csvTests.swift; sourceTree = "<group>"; };
-		FEC83E9C2A3CF76600FFD551 /* readWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readWriteTests.swift; sourceTree = "<group>"; };
+		FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTests.swift; sourceTree = "<group>"; };
+		FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +175,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		FEC7E4F12A5310C800349B4F /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		FEC83E502A3CF1DA00FFD551 = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +206,7 @@
 		FEC83E5B2A3CF1DA00FFD551 /* todo-app-ahc */ = {
 			isa = PBXGroup;
 			children = (
-				FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */,
+				FEC7E4F12A5310C800349B4F /* Animations */,
 				FE0085432A4672E70049F403 /* Extensions */,
 				FE00852F2A4670EB0049F403 /* ViewControllers */,
 				FE00852E2A4670CF0049F403 /* Views */,
@@ -215,9 +223,9 @@
 		FEC83E722A3CF1DE00FFD551 /* todo-app-ahcTests */ = {
 			isa = PBXGroup;
 			children = (
-				FEC83E962A3CF6CB00FFD551 /* jsonTests.swift */,
-				FEC83E9A2A3CF72C00FFD551 /* csvTests.swift */,
-				FEC83E9C2A3CF76600FFD551 /* readWriteTests.swift */,
+				FEC83E962A3CF6CB00FFD551 /* JSONTests.swift */,
+				FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */,
+				FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */,
 				FEC83E982A3CF70800FFD551 /* TestData.swift */,
 			);
 			path = "todo-app-ahcTests";
@@ -240,6 +248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEC83E832A3CF1DE00FFD551 /* Build configuration list for PBXNativeTarget "todo-app-ahc" */;
 			buildPhases = (
+				FEC7E4F02A52F2E300349B4F /* ShellScript */,
 				85774A19CDBEC45B223CC428 /* [CP] Check Pods Manifest.lock */,
 				FEC83E552A3CF1DA00FFD551 /* Sources */,
 				FEC83E562A3CF1DA00FFD551 /* Frameworks */,
@@ -383,6 +392,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FEC7E4F02A52F2E300349B4F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint --fix && ${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -418,10 +445,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEC83E972A3CF6CB00FFD551 /* jsonTests.swift in Sources */,
-				FEC83E9D2A3CF76600FFD551 /* readWriteTests.swift in Sources */,
+				FEC83E972A3CF6CB00FFD551 /* JSONTests.swift in Sources */,
+				FEC83E9D2A3CF76600FFD551 /* ReadWriteTests.swift in Sources */,
 				FEC83E992A3CF70800FFD551 /* TestData.swift in Sources */,
-				FEC83E9B2A3CF72C00FFD551 /* csvTests.swift in Sources */,
+				FEC83E9B2A3CF72C00FFD551 /* CSVTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

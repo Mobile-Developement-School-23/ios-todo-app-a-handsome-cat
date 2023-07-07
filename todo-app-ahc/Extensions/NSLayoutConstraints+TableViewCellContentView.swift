@@ -1,8 +1,7 @@
-
 import UIKit
 
 extension NSLayoutConstraint {
-    
+
     static func constraintToTableViewCellContentView(view: UIView, cell: UITableViewCell) {
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
