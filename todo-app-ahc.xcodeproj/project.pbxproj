@@ -39,6 +39,7 @@
 		FEC83E992A3CF70800FFD551 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E982A3CF70800FFD551 /* TestData.swift */; };
 		FEC83E9B2A3CF72C00FFD551 /* CSVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */; };
 		FEC83E9D2A3CF76600FFD551 /* ReadWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */; };
+		FEF8AA7D2A58EC3600640FB1 /* URLSession+CustomDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF8AA7C2A58EC3600640FB1 /* URLSession+CustomDataTask.swift */; };
 		FEFBFCFB2A54545100D430BC /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFBFCFA2A54545100D430BC /* DefaultNetworkingService.swift */; };
 		FEFBFCFD2A54560400D430BC /* NetworkingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFBFCFC2A54560400D430BC /* NetworkingServiceProtocol.swift */; };
 		FEFBFD032A55684C00D430BC /* RequestAndResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFBFD022A55684C00D430BC /* RequestAndResponseTypes.swift */; };
@@ -93,6 +94,7 @@
 		FEC83E982A3CF70800FFD551 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTests.swift; sourceTree = "<group>"; };
 		FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteTests.swift; sourceTree = "<group>"; };
+		FEF8AA7C2A58EC3600640FB1 /* URLSession+CustomDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CustomDataTask.swift"; sourceTree = "<group>"; };
 		FEFBFCFA2A54545100D430BC /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 		FEFBFCFC2A54560400D430BC /* NetworkingServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceProtocol.swift; sourceTree = "<group>"; };
 		FEFBFD022A55684C00D430BC /* RequestAndResponseTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAndResponseTypes.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				FEFBFCFA2A54545100D430BC /* DefaultNetworkingService.swift */,
 				FEFBFCFC2A54560400D430BC /* NetworkingServiceProtocol.swift */,
 				FEFBFD022A55684C00D430BC /* RequestAndResponseTypes.swift */,
+				FEF8AA7C2A58EC3600640FB1 /* URLSession+CustomDataTask.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				FEFBFD052A57425700D430BC /* TodoItemsManager.swift in Sources */,
 				FE0085362A4672050049F403 /* PriorityTableViewCell.swift in Sources */,
 				FE0085472A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift in Sources */,
+				FEF8AA7D2A58EC3600640FB1 /* URLSession+CustomDataTask.swift in Sources */,
 				FE00853A2A4672530049F403 /* DatePickerTableViewCell.swift in Sources */,
 				FEB3398A2A584378000BE02F /* TodoItemServer.swift in Sources */,
 				FE00853E2A4672910049F403 /* ColorPickerTableViewCell.swift in Sources */,
@@ -640,6 +644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ahc.todo-app-a-handsome-cat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -669,6 +674,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ahc.todo-app-a-handsome-cat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
