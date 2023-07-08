@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 enum PriorityServer: String, Codable {
     case low = "low"
@@ -115,7 +114,7 @@ struct TodoItemServer: Codable {
                                        createdDate: Int64(item.createdDate.timeIntervalSince1970),
                                        editedDate: editedDate,
                                        color: item.color,
-                                       lastUpdatedBy: UIDevice.current.name)
+                                       lastUpdatedBy: "iPhone")
 
         return localItem
     }

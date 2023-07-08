@@ -150,12 +150,12 @@ class TodoItemsManager {
                 if newDelay < 120 {
                     Task { try await self.sendWithRetries(request, delay: newDelay) }
                 } else {
-                    //помечаем модель как dirty, чтобы в следующем запуске попытаться пропатчить...
+                    // помечаем модель как dirty, чтобы в следующем запуске попытаться пропатчить...
                     self.fileCache.isDirty = true
 
                     self.getList(completion: {
                         self.fileCache.isDirty = false
-                        //...но если мы смогли получить список от сервера, то не надо
+                        // ...но если мы смогли получить список от сервера, то не надо
                     })
                 }
             }
