@@ -26,6 +26,8 @@
 		FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */; };
 		FE53040B2A4F7C81005B5A8A /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040A2A4F7C81005B5A8A /* CocoaLumberjack */; };
 		FE53040D2A4F7C81005B5A8A /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE53040C2A4F7C81005B5A8A /* CocoaLumberjackSwift */; };
+		FE662A812A59FD17008C986A /* AddNewItemCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE662A802A59FD17008C986A /* AddNewItemCircleButton.swift */; };
+		FE662A852A5A1578008C986A /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE662A842A5A1578008C986A /* CheckmarkButton.swift */; };
 		FEB3398A2A584378000BE02F /* TodoItemServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB339892A584378000BE02F /* TodoItemServer.swift */; };
 		FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */; };
 		FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E5E2A3CF1DA00FFD551 /* SceneDelegate.swift */; };
@@ -78,6 +80,8 @@
 		FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemTableViewCell.swift; sourceTree = "<group>"; };
 		FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItem+DateStrings.swift"; sourceTree = "<group>"; };
 		FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningAnimationController.swift; sourceTree = "<group>"; };
+		FE662A802A59FD17008C986A /* AddNewItemCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemCircleButton.swift; sourceTree = "<group>"; };
+		FE662A842A5A1578008C986A /* CheckmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButton.swift; sourceTree = "<group>"; };
 		FEB339892A584378000BE02F /* TodoItemServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemServer.swift; sourceTree = "<group>"; };
 		FEC83E592A3CF1DA00FFD551 /* todo-app-ahc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "todo-app-ahc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEC83E5C2A3CF1DA00FFD551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 		FE00852E2A4670CF0049F403 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FE662A832A5A142D008C986A /* ButtonsAndImages */,
 				FE0085302A4670FA0049F403 /* TableViewCells */,
 				FE0085412A4672D50049F403 /* ColorPickerView.swift */,
 			);
@@ -185,6 +190,15 @@
 				FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE662A832A5A142D008C986A /* ButtonsAndImages */ = {
+			isa = PBXGroup;
+			children = (
+				FE662A802A59FD17008C986A /* AddNewItemCircleButton.swift */,
+				FE662A842A5A1578008C986A /* CheckmarkButton.swift */,
+			);
+			path = ButtonsAndImages;
 			sourceTree = "<group>";
 		};
 		FEC7E4F12A5310C800349B4F /* Animations */ = {
@@ -434,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint --fix && ${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -460,6 +474,7 @@
 				FE0085342A4671590049F403 /* TextViewTableViewCell.swift in Sources */,
 				FE0085322A4671280049F403 /* TodoDetailsTableViewController.swift in Sources */,
 				FEC83E5D2A3CF1DA00FFD551 /* AppDelegate.swift in Sources */,
+				FE662A812A59FD17008C986A /* AddNewItemCircleButton.swift in Sources */,
 				FE5303FE2A498570005B5A8A /* TodoItemTableViewCell.swift in Sources */,
 				FEFBFCFB2A54545100D430BC /* DefaultNetworkingService.swift in Sources */,
 				FE0085452A4673010049F403 /* UIColor+HEXCode.swift in Sources */,
@@ -469,6 +484,7 @@
 				FEC83E932A3CF66C00FFD551 /* FileCache.swift in Sources */,
 				FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */,
 				FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */,
+				FE662A852A5A1578008C986A /* CheckmarkButton.swift in Sources */,
 				FE0085422A4672D50049F403 /* ColorPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

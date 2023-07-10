@@ -1,10 +1,9 @@
 import UIKit
-import CocoaLumberjackSwift
 
 class TodoItemTableViewCell: UITableViewCell {
 
     let stackView = UIStackView()
-    let checkmarkButton = UIButton()
+    let checkmarkButton = CheckmarkButton()
     let verticalStackView = UIStackView()
     let itemTextLabel = UILabel()
     let deadlineLabel = UILabel()
@@ -35,20 +34,9 @@ class TodoItemTableViewCell: UITableViewCell {
         NSLayoutConstraint.constraintToTableViewCellContentView(view: stackView, cell: self)
 
         stackView.addArrangedSubview(checkmarkButton)
-
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 24)
-
-        let doneImg = UIImage(systemName: "checkmark.circle.fill",
-                              withConfiguration: symbolConfiguration)?.withTintColor(.systemGreen,
-                                                                                     renderingMode: .alwaysOriginal)
-        let undoneImg = UIImage(systemName: "circle",
-                                withConfiguration: symbolConfiguration)?.withTintColor(.systemRed,
-                                                                                       renderingMode: .alwaysOriginal)
-        let highPriorityImg = UIImage(systemName: "circle", withConfiguration: symbolConfiguration)?
-            .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        checkmarkButton.setAppearance(isDone: item.isDone, highPriority: item.priority == .high)
 
         if item.isDone {
-            checkmarkButton.setImage(doneImg, for: .normal)
             itemTextLabel.attributedText = NSAttributedString(string: item.text,
                                                               attributes: [
                                                                 .strikethroughStyle: NSUnderlineStyle.thick.rawValue,
@@ -56,7 +44,6 @@ class TodoItemTableViewCell: UITableViewCell {
                                                                 .font: UIFont.systemFont(ofSize: 17)
                                                               ])
         } else if item.priority == .high {
-            checkmarkButton.setImage(undoneImg, for: .normal)
             let attachment = NSTextAttachment()
             attachment.image = UIImage(systemName: "exclamationmark.2",
                                        withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))?
@@ -66,15 +53,11 @@ class TodoItemTableViewCell: UITableViewCell {
                                              attributes: [.font: UIFont.systemFont(ofSize: 17)]))
             itemTextLabel.attributedText = string
         } else {
-            checkmarkButton.setImage(highPriorityImg, for: .normal)
             itemTextLabel.attributedText = NSAttributedString(string: item.text,
                                                               attributes: [.font: UIFont.systemFont(ofSize: 17)])
             itemTextLabel.numberOfLines = 3
         }
 
-        if let img = doneImg {
-            checkmarkButton.widthAnchor.constraint(equalToConstant: img.size.width).isActive = true
-        }
         checkmarkButton.addTarget(self, action: #selector(callAction), for: .touchUpInside)
 
         verticalStackView.axis = .vertical
