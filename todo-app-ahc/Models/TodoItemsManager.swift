@@ -17,7 +17,7 @@ class TodoItemsManager {
     var items: [TodoItem] = []
 
     func getList(completion: @escaping () -> Void) {
-        fileCache.loadFromJSONFile(fileName: filename)
+        fileCache.loadFromSQLDatabase(fileName: filename)
         items = fileCache.items
 
         if fileCache.isDirty {
@@ -41,7 +41,7 @@ class TodoItemsManager {
                         items.append(serverItem.convertToLocal())
                     }
                     fileCache.replace(with: items)
-                    fileCache.saveToJSONFile(fileName: filename)
+                    fileCache.saveToSQLDatabase()
                     self.items = items
                 }
             } catch {
@@ -89,7 +89,7 @@ class TodoItemsManager {
     func addItem(_ item: TodoItem) {
         items.append(item)
         fileCache.add(newItem: item)
-        fileCache.saveToJSONFile(fileName: filename)
+        fileCache.saveToSQLDatabase()
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -108,7 +108,7 @@ class TodoItemsManager {
             items[index] = item
         }
         fileCache.add(newItem: item)
-        fileCache.saveToJSONFile(fileName: filename)
+        fileCache.saveToSQLDatabase()
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -128,7 +128,7 @@ class TodoItemsManager {
             items.remove(at: index)
         }
         fileCache.delete(byID: item.id)
-        fileCache.saveToJSONFile(fileName: filename)
+        fileCache.saveToSQLDatabase()
 
         Task {
             let fetchConfigurationRequest = APIRequest(httpMethod: "DELETE",

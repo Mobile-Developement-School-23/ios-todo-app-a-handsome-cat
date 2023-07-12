@@ -4,7 +4,7 @@ class CheckmarkButton: UIButton {
     func setAppearance(isDone: Bool, highPriority: Bool) {
         translatesAutoresizingMaskIntoConstraints = false
 
-        var configuration = UIImage.SymbolConfiguration(pointSize: 24)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 24)
 
         let doneImage = UIImage(systemName: "checkmark.circle.fill",
                               withConfiguration: configuration)

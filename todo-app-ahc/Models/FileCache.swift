@@ -1,8 +1,17 @@
 import Foundation
+import SQLite3
 
 class FileCache {
 
+    enum DBErrors: Error {
+        case openingDatabaseError
+        case creatingDatabaseError
+        case preparingDatabaseError
+    }
+
+    var database: OpaquePointer?
     private(set) var items = [TodoItem]()
+
     var isDirty: Bool {
         get {
             UserDefaults.standard.value(forKey: "isDirty") as? Bool ?? false
@@ -88,6 +97,69 @@ class FileCache {
         } catch {
             print("Error loading from CSV file")
             return
+        }
+    }
+
+    func saveToSQLDatabase() {
+        var statement: OpaquePointer?
+
+        for item in items {
+            let queryString = item.sqlReplaceStatement
+
+            if sqlite3_prepare(database, queryString, -1, &statement, nil) != SQLITE_OK {
+                return
+            }
+
+            if sqlite3_step(statement) != SQLITE_DONE {
+                return
+            }
+        }
+    }
+
+    func loadFromSQLDatabase(fileName: String) {
+        do {
+
+            if database == nil {
+                let applicationSupportFolder = try FileManager.default.url(for: .applicationSupportDirectory,
+                                                                           in: .userDomainMask,
+                                                                           appropriateFor: nil,
+                                                                           create: true)
+                let fileURL = applicationSupportFolder.appendingPathComponent(fileName).appendingPathExtension("sqlite")
+                if sqlite3_open(fileURL.path, &database) != SQLITE_OK {
+                    print("error opening database")
+                }
+
+                if sqlite3_exec(database, """
+                    CREATE TABLE IF NOT EXISTS TodoItems
+                    (id TEXT PRIMARY KEY,
+                    text TEXT,
+                    priority TEXT,
+                    deadline REAL,
+                    isDone TEXT,
+                    createdDate REAL,
+                    editedDate REAL,
+                    color TEXT)
+                    """, nil, nil, nil) != SQLITE_OK {
+                    throw DBErrors.creatingDatabaseError
+                }
+            }
+
+            let query = "SELECT * FROM TodoItems"
+
+            var statement: OpaquePointer?
+
+            if sqlite3_prepare(database, query, -1, &statement, nil) != SQLITE_OK {
+                throw DBErrors.preparingDatabaseError
+            }
+
+            while sqlite3_step(statement) == SQLITE_ROW {
+                if let statement = statement, let item = TodoItem.parseSQLStatement(statement) {
+                    items.append(item)
+                }
+            }
+
+        } catch {
+            print("error loading from sql")
         }
     }
 }
