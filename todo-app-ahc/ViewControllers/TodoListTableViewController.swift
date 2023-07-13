@@ -46,10 +46,7 @@ class TodoListTableViewController: UITableViewController {
 
         tableView.register(TodoItemTableViewCell.self, forCellReuseIdentifier: cellID)
 
-        let addNewItemCircleButton = UIButton()
-        addNewItemCircleButton.setImage(UIImage(systemName: "plus.circle.fill",
-                                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))?
-            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
+        let addNewItemCircleButton = AddNewItemCircleButton()
         self.view.addSubview(addNewItemCircleButton)
         addNewItemCircleButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -58,10 +55,6 @@ class TodoListTableViewController: UITableViewController {
             addNewItemCircleButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor)
         ])
 
-        addNewItemCircleButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
-        addNewItemCircleButton.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
-        addNewItemCircleButton.layer.shadowOpacity = 1.0
-        addNewItemCircleButton.layer.shadowRadius = 5.0
         addNewItemCircleButton.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
     }
 
