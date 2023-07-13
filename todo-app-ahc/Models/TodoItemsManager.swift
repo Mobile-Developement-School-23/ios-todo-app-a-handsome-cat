@@ -1,6 +1,9 @@
 import Foundation
+import UIKit
 
 class TodoItemsManager {
+
+    var updateTableView: (() -> Void)?
 
     let networkService = DefaultNetworkingService()
     var currentServerRevision: Int32 {
@@ -16,7 +19,7 @@ class TodoItemsManager {
 
     var items: [TodoItem] = []
 
-    func getList(completion: @escaping () -> Void) {
+    func getList() {
         fileCache.loadFromSQLDatabase(fileName: filename)
         items = fileCache.items
 
@@ -33,24 +36,23 @@ class TodoItemsManager {
             do {
                 let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
                 let resp = try JSONDecoder().decode(APIResponse.self, from: data)
-                currentServerRevision = resp.revision
 
-                if let fetched = resp.list {
-                    items = []
-                    for serverItem in fetched {
-                        items.append(serverItem.convertToLocal())
+                if resp.revision > currentServerRevision {
+                    if let fetched = resp.list {
+                        items = []
+                        for serverItem in fetched {
+                            items.append(serverItem.convertToLocal())
+                        }
+                        fileCache.replace(with: items)
+                        currentServerRevision = resp.revision
+                        fileCache.updateSQLFromServer()
+                        self.items = items
                     }
-                    fileCache.replace(with: items)
-                    fileCache.saveToSQLDatabase()
-                    self.items = items
                 }
             } catch {
                 networkService.active -= 1
             }
-
-            DispatchQueue.main.async {
-                completion()
-            }
+            updateParentTableView()
         }
     }
 
@@ -79,6 +81,7 @@ class TodoItemsManager {
                         items.append(serverItem.convertToLocal())
                     }
                     self.items = items
+                    fileCache.updateSQLFromServer()
                 }
             } catch {
                 networkService.active -= 1
@@ -89,7 +92,7 @@ class TodoItemsManager {
     func addItem(_ item: TodoItem) {
         items.append(item)
         fileCache.add(newItem: item)
-        fileCache.saveToSQLDatabase()
+        fileCache.performSQLStatement(.insert, item: item)
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -108,7 +111,7 @@ class TodoItemsManager {
             items[index] = item
         }
         fileCache.add(newItem: item)
-        fileCache.saveToSQLDatabase()
+        fileCache.performSQLStatement(.update, item: item)
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -128,7 +131,7 @@ class TodoItemsManager {
             items.remove(at: index)
         }
         fileCache.delete(byID: item.id)
-        fileCache.saveToSQLDatabase()
+        fileCache.performSQLStatement(.delete, item: item)
 
         Task {
             let fetchConfigurationRequest = APIRequest(httpMethod: "DELETE",
@@ -150,18 +153,26 @@ class TodoItemsManager {
                 if newDelay < 120 {
                     Task { try await self.sendWithRetries(request, delay: newDelay) }
                 } else {
-                    // помечаем модель как dirty, чтобы в следующем запуске попытаться пропатчить...
                     self.fileCache.isDirty = true
-
-                    self.getList(completion: {
-                        self.fileCache.isDirty = false
-                        // ...но если мы смогли получить список от сервера, то не надо
-                    })
                 }
+            }
+        } catch NetworkingErrors.needToUpdateFromServer {
+            networkService.active -= 1
+            Task {
+                getList()
+                updateParentTableView()
             }
         } catch {
             networkService.active -= 1
             self.fileCache.isDirty = true
+        }
+    }
+
+    func updateParentTableView() {
+        DispatchQueue.main.async {
+            if let updateTableView = self.updateTableView {
+                updateTableView()
+            }
         }
     }
 }

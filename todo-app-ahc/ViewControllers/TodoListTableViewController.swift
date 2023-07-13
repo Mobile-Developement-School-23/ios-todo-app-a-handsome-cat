@@ -25,6 +25,8 @@ class TodoListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        itemsManager.updateTableView = { self.tableView.reloadData() }
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
 
         NotificationCenter.default.addObserver(self,
@@ -33,7 +35,7 @@ class TodoListTableViewController: UITableViewController {
                                                object: nil)
 
         Task {
-            itemsManager.getList(completion: { self.tableView.reloadData() })
+            itemsManager.getList()
             tableView.reloadData()
         }
 

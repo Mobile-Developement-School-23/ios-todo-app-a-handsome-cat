@@ -9,6 +9,12 @@ class FileCache {
         case preparingDatabaseError
     }
 
+    enum SQLStatement {
+        case insert
+        case update
+        case delete
+    }
+
     var database: OpaquePointer?
     private(set) var items = [TodoItem]()
 
@@ -126,7 +132,7 @@ class FileCache {
                                                                            create: true)
                 let fileURL = applicationSupportFolder.appendingPathComponent(fileName).appendingPathExtension("sqlite")
                 if sqlite3_open(fileURL.path, &database) != SQLITE_OK {
-                    print("error opening database")
+                    return
                 }
 
                 if sqlite3_exec(database, """
@@ -159,7 +165,64 @@ class FileCache {
             }
 
         } catch {
-            print("error loading from sql")
+
         }
+    }
+
+    func performSQLStatement(_ method: SQLStatement, item: TodoItem) {
+        var statement: OpaquePointer?
+        var queryString = ""
+
+        guard let json = item.json as? [String: Any] else { return }
+
+        switch method {
+        case .insert:
+            let keys = json.keys.joined(separator: ", ")
+            let values = json.values.map({ "\"\($0)\"" }).joined(separator: ", ")
+            queryString = "INSERT INTO TodoItems (\(keys)) VALUES (\(values))"
+        case .update:
+            queryString = """
+                UPDATE TodoItems SET
+                text = "\(item.text)",
+                priority = "\(item.priority.rawValue)",
+                deadline = \(json["deadline", default: "null"]),
+                isDone = "\(item.isDone)",
+                editedDate = \(json["editedDate", default: "null"]),
+                color = \(json["color"].flatMap({ "\"\($0)\""}) ?? "null")
+                WHERE id = "\(item.id)"
+                """
+        case .delete:
+            queryString = "DELETE FROM TodoItems WHERE id = \"\(item.id)\""
+        }
+
+        if sqlite3_prepare(database, queryString, -1, &statement, nil) != SQLITE_OK {
+            return
+        }
+
+        if sqlite3_step(statement) != SQLITE_DONE {
+            return
+        }
+    }
+
+    func updateSQLFromServer() {
+        if sqlite3_exec(database, """
+            DROP TABLE IF EXISTS TodoItems
+            """, nil, nil, nil) != SQLITE_OK {
+            return
+        }
+        if sqlite3_exec(database, """
+            CREATE TABLE IF NOT EXISTS TodoItems
+            (id TEXT PRIMARY KEY,
+            text TEXT,
+            priority TEXT,
+            deadline REAL,
+            isDone TEXT,
+            createdDate REAL,
+            editedDate REAL,
+            color TEXT)
+            """, nil, nil, nil) != SQLITE_OK {
+            return
+        }
+        saveToSQLDatabase()
     }
 }

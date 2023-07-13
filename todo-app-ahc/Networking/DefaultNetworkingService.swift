@@ -43,6 +43,8 @@ class DefaultNetworkingService: NetworkingService {
         guard response.statusCode == 200 else {
             if response.statusCode == 500 {
                 throw NetworkingErrors.serverError
+            } else if response.statusCode == 400 {
+                throw NetworkingErrors.needToUpdateFromServer
             } else {
                 throw NetworkingErrors.unknownError
             }
