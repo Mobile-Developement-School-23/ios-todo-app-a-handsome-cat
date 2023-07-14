@@ -150,4 +150,15 @@ extension TodoItem {
                         editedDate: editedDate,
                         color: color)
     }
+
+    static func parseCoreDataItem(coreDataItem: TodoItemCoreData) -> TodoItem {
+        return TodoItem(id: coreDataItem.id,
+                        text: coreDataItem.text,
+                        priority: Priority(rawValue: coreDataItem.priority) ?? .medium,
+                        deadline: coreDataItem.deadline,
+                        isDone: coreDataItem.isDone,
+                        createdDate: coreDataItem.createdDate,
+                        editedDate: coreDataItem.editedDate,
+                        color: coreDataItem.color)
+    }
 }

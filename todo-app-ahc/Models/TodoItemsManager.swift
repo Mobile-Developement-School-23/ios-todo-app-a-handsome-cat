@@ -14,13 +14,13 @@ class TodoItemsManager {
         }
     }
 
-    let fileCache = FileCache()
+    let fileCache = FileCache(storageMethod: .coreData)
     let filename = "jsonitems"
 
     var items: [TodoItem] = []
 
     func getList() {
-        fileCache.loadFromSQLDatabase(fileName: filename)
+        fileCache.loadItems(fileName: filename)
         items = fileCache.items
 
         if fileCache.isDirty {
@@ -45,8 +45,11 @@ class TodoItemsManager {
                         }
                         fileCache.replace(with: items)
                         currentServerRevision = resp.revision
-                        fileCache.updateSQLFromServer()
+                        DispatchQueue.main.async {
+                            self.fileCache.updateSavedFromServer(fileName: self.filename)
+                        }
                         self.items = items
+                        self.fileCache.isDirty = false
                     }
                 }
             } catch {
@@ -81,7 +84,8 @@ class TodoItemsManager {
                         items.append(serverItem.convertToLocal())
                     }
                     self.items = items
-                    fileCache.updateSQLFromServer()
+                    fileCache.replace(with: items)
+                    fileCache.updateSavedFromServer(fileName: self.filename)
                 }
             } catch {
                 networkService.active -= 1
@@ -92,7 +96,7 @@ class TodoItemsManager {
     func addItem(_ item: TodoItem) {
         items.append(item)
         fileCache.add(newItem: item)
-        fileCache.performSQLStatement(.insert, item: item)
+        fileCache.addItem(item: item, fileName: filename)
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -111,7 +115,7 @@ class TodoItemsManager {
             items[index] = item
         }
         fileCache.add(newItem: item)
-        fileCache.performSQLStatement(.update, item: item)
+        fileCache.updateItem(item: item, fileName: self.filename)
 
         Task {
             let outgoing = APIOutgoing(element: TodoItemServer.convertToServer(item: item))
@@ -131,7 +135,7 @@ class TodoItemsManager {
             items.remove(at: index)
         }
         fileCache.delete(byID: item.id)
-        fileCache.performSQLStatement(.delete, item: item)
+        fileCache.deleteItem(item: item, fileName: self.filename)
 
         Task {
             let fetchConfigurationRequest = APIRequest(httpMethod: "DELETE",
@@ -159,6 +163,7 @@ class TodoItemsManager {
         } catch NetworkingErrors.needToUpdateFromServer {
             networkService.active -= 1
             Task {
+                self.fileCache.isDirty = true
                 getList()
                 updateParentTableView()
             }

@@ -1,7 +1,22 @@
 import Foundation
+import UIKit
 import SQLite3
+import CoreData
 
 class FileCache {
+
+    init(storageMethod: StorageMethod) {
+        self.storageMethod = storageMethod
+    }
+
+    let storageMethod: StorageMethod
+
+    enum StorageMethod {
+        case json
+        case csv
+        case sql
+        case coreData
+    }
 
     enum DBErrors: Error {
         case openingDatabaseError
@@ -9,7 +24,7 @@ class FileCache {
         case preparingDatabaseError
     }
 
-    enum SQLStatement {
+    enum DatabaseAction {
         case insert
         case update
         case delete
@@ -169,7 +184,7 @@ class FileCache {
         }
     }
 
-    func performSQLStatement(_ method: SQLStatement, item: TodoItem) {
+    func performSQLStatement(_ method: DatabaseAction, item: TodoItem) {
         var statement: OpaquePointer?
         var queryString = ""
 
@@ -224,5 +239,87 @@ class FileCache {
             return
         }
         saveToSQLDatabase()
+    }
+
+    func performCoreDataAction(_ action: DatabaseAction, item: TodoItem) {
+        do {
+            guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = delegate.persistentContainer.viewContext
+            let request: NSFetchRequest<TodoItemCoreData> = TodoItemCoreData.fetchRequest()
+
+            switch action {
+            case .insert:
+                guard let entity = NSEntityDescription.entity(forEntityName: "TodoItemCoreData", in: context)
+                else { return }
+                let newItem = TodoItemCoreData(entity: entity, insertInto: context)
+                newItem.id = item.id
+                newItem.text = item.text
+                newItem.priority = item.priority.rawValue
+                newItem.deadline = item.deadline
+                newItem.isDone = item.isDone
+                newItem.createdDate = item.createdDate
+                newItem.editedDate = item.editedDate
+                newItem.color = item.color
+                try context.save()
+            case .update:
+                request.predicate = NSPredicate(format: "id == %@", item.id)
+                let results = try context.fetch(request)
+                if let itemToUpdate = results.first {
+                    itemToUpdate.text = item.text
+                    itemToUpdate.priority = item.priority.rawValue
+                    itemToUpdate.deadline = item.deadline
+                    itemToUpdate.isDone = item.isDone
+                    itemToUpdate.editedDate = item.editedDate
+                    itemToUpdate.color = item.color
+                }
+                try context.save()
+            case .delete:
+                request.predicate = NSPredicate(format: "id == %@", item.id)
+                let results = try context.fetch(request)
+                if let itemToDelete = results.first {
+                    context.delete(itemToDelete)
+                }
+                try context.save()
+            }
+        } catch {
+        }
+    }
+
+    func loadFromCoreData() {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = delegate.persistentContainer.viewContext
+        let request: NSFetchRequest<TodoItemCoreData> = TodoItemCoreData.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                items.append(TodoItem.parseCoreDataItem(coreDataItem: result))
+            }
+        } catch {
+        }
+    }
+
+    func updateCoreDataFromServer() {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = delegate.persistentContainer.viewContext
+        var fetchedIDs: Set<String> = Set()
+        for item in items {
+            fetchedIDs.insert(item.id)
+            performCoreDataAction(.update, item: item)
+        }
+        let request: NSFetchRequest<TodoItemCoreData> = TodoItemCoreData.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                if fetchedIDs.contains(result.id) {
+                    continue
+                } else {
+                    context.delete(result)
+                }
+            }
+            try context.save()
+        } catch {
+        }
     }
 }
