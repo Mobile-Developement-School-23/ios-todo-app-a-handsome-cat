@@ -4,6 +4,7 @@ enum NetworkingErrors: Error {
     case formingRequest
     case wrongResponse
     case serverError
+    case needToUpdateFromServer
     case unknownError
 }
 

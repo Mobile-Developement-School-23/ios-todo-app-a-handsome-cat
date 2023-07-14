@@ -1,4 +1,5 @@
 import Foundation
+import SQLite3
 
 enum Priority: String {
     case low = "неважная"
@@ -100,5 +101,64 @@ extension TodoItem {
                         createdDate: Date(timeIntervalSince1970: createdDate),
                         editedDate: editedDate,
                         color: color)
+    }
+
+    var sqlReplaceStatement: String {
+        guard let json = json as? [String: Any] else { return "" }
+        let keys = json.keys.joined(separator: ", ")
+        let values = json.values.map({ "\"\($0)\"" }).joined(separator: ", ")
+        return "REPLACE INTO TodoItems (\(keys)) VALUES (\(values));"
+    }
+
+    static func parseSQLStatement(_ statement: OpaquePointer) -> TodoItem? {
+        guard
+            let id = sqlite3_column_text(statement, 0).flatMap({ String(cString: $0)}),
+            let text = sqlite3_column_text(statement, 1).flatMap({ String(cString: $0)}),
+            let isDone = sqlite3_column_text(statement, 4).flatMap({ Bool(String(cString: $0)) }),
+            sqlite3_column_type(statement, 5) == SQLITE_FLOAT
+        else { return nil }
+
+        let createdDate = sqlite3_column_double(statement, 5)
+
+        var priority: Priority {
+            return sqlite3_column_text(statement, 2).flatMap({ Priority(rawValue: String(cString: $0)) }) ?? .medium
+        }
+
+        var deadline: Date? {
+            if sqlite3_column_type(statement, 3) == SQLITE_FLOAT {
+                return Date(timeIntervalSince1970: sqlite3_column_double(statement, 3))
+            } else {
+                return nil
+            }
+        }
+
+        var editedDate: Date? {
+            if sqlite3_column_type(statement, 6) == SQLITE_FLOAT {
+                return Date(timeIntervalSince1970: sqlite3_column_double(statement, 6))
+            } else {
+                return nil
+            }
+        }
+        let color = sqlite3_column_text(statement, 7).flatMap({ String(cString: $0) })
+
+        return TodoItem(id: id,
+                        text: text,
+                        priority: priority,
+                        deadline: deadline,
+                        isDone: isDone,
+                        createdDate: Date(timeIntervalSince1970: createdDate),
+                        editedDate: editedDate,
+                        color: color)
+    }
+
+    static func parseCoreDataItem(coreDataItem: TodoItemCoreData) -> TodoItem {
+        return TodoItem(id: coreDataItem.id,
+                        text: coreDataItem.text,
+                        priority: Priority(rawValue: coreDataItem.priority) ?? .medium,
+                        deadline: coreDataItem.deadline,
+                        isDone: coreDataItem.isDone,
+                        createdDate: coreDataItem.createdDate,
+                        editedDate: coreDataItem.editedDate,
+                        color: coreDataItem.color)
     }
 }
