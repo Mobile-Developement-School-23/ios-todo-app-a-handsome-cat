@@ -271,6 +271,8 @@ class FileCache {
                     itemToUpdate.isDone = item.isDone
                     itemToUpdate.editedDate = item.editedDate
                     itemToUpdate.color = item.color
+                } else {
+                    performCoreDataAction(.insert, item: item)
                 }
                 try context.save()
             case .delete:
