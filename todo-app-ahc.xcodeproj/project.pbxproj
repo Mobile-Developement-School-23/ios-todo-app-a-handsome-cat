@@ -24,6 +24,8 @@
 		FE148FE12A619FC2007975AF /* TodoItemCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148FDF2A619FC2007975AF /* TodoItemCoreData+CoreDataClass.swift */; };
 		FE148FE22A619FC2007975AF /* TodoItemCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148FE02A619FC2007975AF /* TodoItemCoreData+CoreDataProperties.swift */; };
 		FE148FE62A61F05B007975AF /* FileCache+UniversalFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE148FE52A61F05B007975AF /* FileCache+UniversalFuncs.swift */; };
+		FE3B09E22A67FABB00729469 /* TodoItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B09E12A67FABB00729469 /* TodoItemDetailView.swift */; };
+		FE3B09E72A686C7200729469 /* ColorPickerSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3B09E62A686C7200729469 /* ColorPickerSwiftUIView.swift */; };
 		FE5303FE2A498570005B5A8A /* TodoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */; };
 		FE5304002A49CC9F005B5A8A /* TodoItem+DateStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */; };
 		FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */; };
@@ -45,6 +47,12 @@
 		FEC83E9B2A3CF72C00FFD551 /* CSVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */; };
 		FEC83E9D2A3CF76600FFD551 /* ReadWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */; };
 		FECA9C512A6132A90001181C /* TodoItemsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FECA9C4F2A6132A90001181C /* TodoItemsModel.xcdatamodeld */; };
+		FECFD4F62A66891400055006 /* TodoItemsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD4F52A66891400055006 /* TodoItemsListView.swift */; };
+		FECFD4F92A66898500055006 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD4F82A66898500055006 /* TodoListApp.swift */; };
+		FECFD4FC2A668DA500055006 /* TodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFD4FB2A668DA500055006 /* TodoItemView.swift */; };
+		FEDAD5A72A69DB3600F7F2CD /* Color+HEXCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAD5A62A69DB3600F7F2CD /* Color+HEXCode.swift */; };
+		FEDAD5AC2A6B3E3D00F7F2CD /* CoreDataPersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAD5AB2A6B3E3D00F7F2CD /* CoreDataPersistenceController.swift */; };
+		FEDAD5AE2A6B464B00F7F2CD /* TodoItem+Samples.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAD5AD2A6B464B00F7F2CD /* TodoItem+Samples.swift */; };
 		FEF8AA7D2A58EC3600640FB1 /* URLSession+CustomDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF8AA7C2A58EC3600640FB1 /* URLSession+CustomDataTask.swift */; };
 		FEFBFCFB2A54545100D430BC /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFBFCFA2A54545100D430BC /* DefaultNetworkingService.swift */; };
 		FEFBFCFD2A54560400D430BC /* NetworkingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFBFCFC2A54560400D430BC /* NetworkingServiceProtocol.swift */; };
@@ -84,6 +92,8 @@
 		FE148FDF2A619FC2007975AF /* TodoItemCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemCoreData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		FE148FE02A619FC2007975AF /* TodoItemCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItemCoreData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		FE148FE52A61F05B007975AF /* FileCache+UniversalFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileCache+UniversalFuncs.swift"; sourceTree = "<group>"; };
+		FE3B09E12A67FABB00729469 /* TodoItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemDetailView.swift; sourceTree = "<group>"; };
+		FE3B09E62A686C7200729469 /* ColorPickerSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerSwiftUIView.swift; sourceTree = "<group>"; };
 		FE5303FD2A498570005B5A8A /* TodoItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemTableViewCell.swift; sourceTree = "<group>"; };
 		FE5303FF2A49CC9F005B5A8A /* TodoItem+DateStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItem+DateStrings.swift"; sourceTree = "<group>"; };
 		FE5304072A4F11B5005B5A8A /* TransitioningAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningAnimationController.swift; sourceTree = "<group>"; };
@@ -106,6 +116,12 @@
 		FEC83E9A2A3CF72C00FFD551 /* CSVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTests.swift; sourceTree = "<group>"; };
 		FEC83E9C2A3CF76600FFD551 /* ReadWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteTests.swift; sourceTree = "<group>"; };
 		FECA9C502A6132A90001181C /* TodoItemsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoItemsModel.xcdatamodel; sourceTree = "<group>"; };
+		FECFD4F52A66891400055006 /* TodoItemsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemsListView.swift; sourceTree = "<group>"; };
+		FECFD4F82A66898500055006 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
+		FECFD4FB2A668DA500055006 /* TodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemView.swift; sourceTree = "<group>"; };
+		FEDAD5A62A69DB3600F7F2CD /* Color+HEXCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HEXCode.swift"; sourceTree = "<group>"; };
+		FEDAD5AB2A6B3E3D00F7F2CD /* CoreDataPersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistenceController.swift; sourceTree = "<group>"; };
+		FEDAD5AD2A6B464B00F7F2CD /* TodoItem+Samples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItem+Samples.swift"; sourceTree = "<group>"; };
 		FEF8AA7C2A58EC3600640FB1 /* URLSession+CustomDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CustomDataTask.swift"; sourceTree = "<group>"; };
 		FEFBFCFA2A54545100D430BC /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 		FEFBFCFC2A54560400D430BC /* NetworkingServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceProtocol.swift; sourceTree = "<group>"; };
@@ -241,6 +257,9 @@
 		FEC83E5B2A3CF1DA00FFD551 /* todo-app-ahc */ = {
 			isa = PBXGroup;
 			children = (
+				FEDAD5A52A69DB2400F7F2CD /* SwiftUI Extensions */,
+				FECFD4F72A66896400055006 /* SwiftUI App */,
+				FECFD4F42A6688ED00055006 /* SwiftUI Views */,
 				FEFBFCF92A54543D00D430BC /* Networking */,
 				FEC7E4F12A5310C800349B4F /* Animations */,
 				FE0085432A4672E70049F403 /* Extensions */,
@@ -278,8 +297,45 @@
 				FE148FE52A61F05B007975AF /* FileCache+UniversalFuncs.swift */,
 				FEC83E942A3CF68C00FFD551 /* CSVExtensions.swift */,
 				FEFBFD042A57425700D430BC /* TodoItemsManager.swift */,
+				FEDAD5AB2A6B3E3D00F7F2CD /* CoreDataPersistenceController.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FECFD4F42A6688ED00055006 /* SwiftUI Views */ = {
+			isa = PBXGroup;
+			children = (
+				FECFD4FA2A668D7200055006 /* Subviews */,
+				FECFD4F52A66891400055006 /* TodoItemsListView.swift */,
+				FE3B09E12A67FABB00729469 /* TodoItemDetailView.swift */,
+			);
+			path = "SwiftUI Views";
+			sourceTree = "<group>";
+		};
+		FECFD4F72A66896400055006 /* SwiftUI App */ = {
+			isa = PBXGroup;
+			children = (
+				FECFD4F82A66898500055006 /* TodoListApp.swift */,
+			);
+			path = "SwiftUI App";
+			sourceTree = "<group>";
+		};
+		FECFD4FA2A668D7200055006 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				FECFD4FB2A668DA500055006 /* TodoItemView.swift */,
+				FE3B09E62A686C7200729469 /* ColorPickerSwiftUIView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		FEDAD5A52A69DB2400F7F2CD /* SwiftUI Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FEDAD5A62A69DB3600F7F2CD /* Color+HEXCode.swift */,
+				FEDAD5AD2A6B464B00F7F2CD /* TodoItem+Samples.swift */,
+			);
+			path = "SwiftUI Extensions";
 			sourceTree = "<group>";
 		};
 		FEFBFCF92A54543D00D430BC /* Networking */ = {
@@ -471,18 +527,23 @@
 			files = (
 				FEFBFCFD2A54560400D430BC /* NetworkingServiceProtocol.swift in Sources */,
 				FEC83E612A3CF1DA00FFD551 /* TodoListTableViewController.swift in Sources */,
+				FEDAD5AE2A6B464B00F7F2CD /* TodoItem+Samples.swift in Sources */,
 				FE5304002A49CC9F005B5A8A /* TodoItem+DateStrings.swift in Sources */,
 				FE0085382A4672270049F403 /* DeadlineTableViewCell.swift in Sources */,
 				FE148FE62A61F05B007975AF /* FileCache+UniversalFuncs.swift in Sources */,
+				FECFD4FC2A668DA500055006 /* TodoItemView.swift in Sources */,
 				FE0085402A4672B30049F403 /* ShowColorPickerTableViewCell.swift in Sources */,
 				FEFBFD052A57425700D430BC /* TodoItemsManager.swift in Sources */,
 				FE0085362A4672050049F403 /* PriorityTableViewCell.swift in Sources */,
 				FE148FE22A619FC2007975AF /* TodoItemCoreData+CoreDataProperties.swift in Sources */,
 				FE0085472A4673250049F403 /* TodoListTableViewController+TextViewDelegate.swift in Sources */,
+				FECFD4F92A66898500055006 /* TodoListApp.swift in Sources */,
 				FEF8AA7D2A58EC3600640FB1 /* URLSession+CustomDataTask.swift in Sources */,
 				FE00853A2A4672530049F403 /* DatePickerTableViewCell.swift in Sources */,
 				FEB3398A2A584378000BE02F /* TodoItemServer.swift in Sources */,
+				FECFD4F62A66891400055006 /* TodoItemsListView.swift in Sources */,
 				FE00853E2A4672910049F403 /* ColorPickerTableViewCell.swift in Sources */,
+				FE3B09E72A686C7200729469 /* ColorPickerSwiftUIView.swift in Sources */,
 				FE00853C2A46726B0049F403 /* DeleteButtonTableViewCell.swift in Sources */,
 				FEFBFD032A55684C00D430BC /* RequestAndResponseTypes.swift in Sources */,
 				FE0085342A4671590049F403 /* TextViewTableViewCell.swift in Sources */,
@@ -494,9 +555,12 @@
 				FE0085452A4673010049F403 /* UIColor+HEXCode.swift in Sources */,
 				FEC83E952A3CF68C00FFD551 /* CSVExtensions.swift in Sources */,
 				FECA9C512A6132A90001181C /* TodoItemsModel.xcdatamodeld in Sources */,
+				FE3B09E22A67FABB00729469 /* TodoItemDetailView.swift in Sources */,
+				FEDAD5A72A69DB3600F7F2CD /* Color+HEXCode.swift in Sources */,
 				FEC83E912A3CF64200FFD551 /* ToDoItem.swift in Sources */,
 				FE148FE12A619FC2007975AF /* TodoItemCoreData+CoreDataClass.swift in Sources */,
 				FE0085492A46794F0049F403 /* NSLayoutConstraints+TableViewCellContentView.swift in Sources */,
+				FEDAD5AC2A6B3E3D00F7F2CD /* CoreDataPersistenceController.swift in Sources */,
 				FEC83E932A3CF66C00FFD551 /* FileCache.swift in Sources */,
 				FEC83E5F2A3CF1DA00FFD551 /* SceneDelegate.swift in Sources */,
 				FE5304082A4F11B5005B5A8A /* TransitioningAnimationController.swift in Sources */,
@@ -667,7 +731,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,7 +761,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
