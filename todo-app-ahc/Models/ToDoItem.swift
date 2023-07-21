@@ -7,15 +7,15 @@ enum Priority: String {
     case high = "важная"
 }
 
-struct TodoItem {
+struct TodoItem: Identifiable, Equatable {
     let id: String
-    let text: String
-    let priority: Priority
-    let deadline: Date?
+    var text: String
+    var priority: Priority
+    var deadline: Date?
     var isDone: Bool
     let createdDate: Date
-    let editedDate: Date?
-    let color: String?
+    var editedDate: Date?
+    var color: String?
 
     init(id: String = UUID().uuidString,
          text: String,

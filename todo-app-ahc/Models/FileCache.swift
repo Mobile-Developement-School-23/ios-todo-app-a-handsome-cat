@@ -243,8 +243,7 @@ class FileCache {
 
     func performCoreDataAction(_ action: DatabaseAction, item: TodoItem) {
         do {
-            guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            let context = delegate.persistentContainer.viewContext
+            let context = PersistenceController.shared.container.viewContext
             let request: NSFetchRequest<TodoItemCoreData> = TodoItemCoreData.fetchRequest()
 
             switch action {
@@ -288,8 +287,7 @@ class FileCache {
     }
 
     func loadFromCoreData() {
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = delegate.persistentContainer.viewContext
+        let context = PersistenceController.shared.container.viewContext
         let request: NSFetchRequest<TodoItemCoreData> = TodoItemCoreData.fetchRequest()
         request.returnsObjectsAsFaults = false
         do {
@@ -302,8 +300,7 @@ class FileCache {
     }
 
     func updateCoreDataFromServer() {
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = delegate.persistentContainer.viewContext
+        let context = PersistenceController.shared.container.viewContext
         var fetchedIDs: Set<String> = Set()
         for item in items {
             fetchedIDs.insert(item.id)

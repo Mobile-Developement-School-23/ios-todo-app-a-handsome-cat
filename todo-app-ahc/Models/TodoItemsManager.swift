@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
-
-class TodoItemsManager {
+@MainActor
+class TodoItemsManager: ObservableObject {
 
     var updateTableView: (() -> Void)?
 
@@ -17,7 +17,8 @@ class TodoItemsManager {
     let fileCache = FileCache(storageMethod: .coreData)
     let filename = "jsonitems"
 
-    var items: [TodoItem] = []
+    @Published var items: [TodoItem] = []
+    @Published var active: Int = 0
 
     func getList() {
         fileCache.loadItems(fileName: filename)
@@ -34,6 +35,7 @@ class TodoItemsManager {
             let fetchConfigurationRequest = APIRequest()
 
             do {
+                active += 1
                 let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
                 let resp = try JSONDecoder().decode(APIResponse.self, from: data)
 
@@ -52,8 +54,9 @@ class TodoItemsManager {
                         self.fileCache.isDirty = false
                     }
                 }
+                active -= 1
             } catch {
-                networkService.active -= 1
+                active -= 1
             }
             updateParentTableView()
         }
@@ -73,6 +76,7 @@ class TodoItemsManager {
                                                        revision: currentServerRevision,
                                                        data: outData)
             do {
+                active += 1
                 let data = try await networkService.sendAPIRequest(fetchConfigurationRequest)
                 let resp = try JSONDecoder().decode(APIResponse.self, from: data)
                 currentServerRevision = resp.revision
@@ -86,9 +90,10 @@ class TodoItemsManager {
                     self.items = items
                     fileCache.replace(with: items)
                     fileCache.updateSavedFromServer(fileName: self.filename)
+                    active -= 1
                 }
             } catch {
-                networkService.active -= 1
+                active -= 1
             }
         }
     }
@@ -147,11 +152,13 @@ class TodoItemsManager {
 
     func sendWithRetries(_ request: APIRequest, delay: TimeInterval) async throws {
         do {
+            active += 1
             let data = try await networkService.sendAPIRequest(request)
             let resp = try JSONDecoder().decode(APIResponse.self, from: data)
             currentServerRevision = resp.revision
+            active -= 1
         } catch NetworkingErrors.serverError {
-            networkService.active -= 1
+            active -= 1
             DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
                 let newDelay = delay * 1.5 + Double.random(in: -0.05...0.05)
                 if newDelay < 120 {
@@ -161,14 +168,14 @@ class TodoItemsManager {
                 }
             }
         } catch NetworkingErrors.needToUpdateFromServer {
-            networkService.active -= 1
+            active -= 1
             Task {
                 self.fileCache.isDirty = true
                 getList()
                 updateParentTableView()
             }
         } catch {
-            networkService.active -= 1
+            active -= 1
             self.fileCache.isDirty = true
         }
     }

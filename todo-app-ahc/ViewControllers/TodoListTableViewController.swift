@@ -234,7 +234,7 @@ class TodoListTableViewController: UITableViewController {
 
     @objc func updateActivityIndicator() {
         DispatchQueue.main.async {
-            if self.itemsManager.networkService.active == 0 {
+            if self.itemsManager.active == 0 {
                 self.activityIndicator.stopAnimating()
             } else {
                 self.activityIndicator.startAnimating()
